@@ -10,5 +10,8 @@
     },
     "logs": {
         "html": "infection.html",
+        "stryker": {
+            "badge": "edge"
+        }
     },
 }
