@@ -1,0 +1,43 @@
+name: Mage Core
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Mage Core Build
+    strategy:
+      matrix:
+        php-versions:
+          - 8.2
+    env:
+      PHP_VERSION: ${{ matrix.php-versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - name: Build Container
+        run: task build
+
+      - name: Install Dependencies
+        run: task install
+
+#      - name: Code Analysis
+#        run: task analyse
+
+      - name: Testing
+        run: task test
+
+#      - name: Slack Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        if: always()
+#        env:
+#          SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          SLACK_COLOR: ${{ job.status }}
+#          SLACK_ICON: https://github.githubassets.com/images/icons/copilot/cp-head-square.png?size=48
+#          SLACK_USERNAME: GitHub
+#          SLACK_FOOTER: ${{ secrets.SLACK_FOOTER }}

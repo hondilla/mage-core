@@ -1,0 +1,9 @@
+.idea
+.vscode
+.history
+.fleet
+/vendor
+/build
+.php-cs-fixer.cache
+.phpunit.result.cache
+infection.html

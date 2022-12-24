@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  php:
+    container_name: ${PROJECT_NAME}-php
+    environment:
+      - XDEBUG_MODE=coverage
+      - PHP_IDE_CONFIG=serverName=${PROJECT_NAME}
+    image: ${PROJECT_NAME}-php
+    build:
+      context: "php"
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    networks:
+      - docker
+    volumes:
+      - ../:/app
+      - ~/.config/composer/auth.json:/home/app/.composer/auth.json
+      - ~/.ssh/:/home/app/.ssh:ro
+networks:
+  docker:
+    name: docker

@@ -1,0 +1,42 @@
+version: '3'
+
+env:
+  PROJECT_NAME: mage-core
+  UID:
+    sh: 'if [ `echo $(id -u) -lt 1000` ]; then echo 1000; else echo $(id -u); fi'
+  GID:
+    sh: 'if [ `echo $(id -g) -lt 1000` ]; then echo 1000; else echo $(id -g); fi'
+
+tasks:
+  build:
+    cmds:
+      - UID=$UID GID=$GID docker-compose -f .docker/docker-compose.yml -p $PROJECT_NAME build --compress --pull --no-cache --force-rm
+  down:
+    cmds:
+      - UID=$UID GID=$GID docker-compose -f .docker/docker-compose.yml -p $PROJECT_NAME down
+  clear:
+    cmds:
+      - UID=$UID GID=$GID docker-compose -f .docker/docker-compose.yml -p $PROJECT_NAME down --rmi all
+  composer:
+    cmds:
+      - UID=$UID GID=$GID docker-compose -f .docker/docker-compose.yml -p $PROJECT_NAME run --rm php composer {{.CLI_ARGS}}
+  install:
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: 'install'}
+  update:
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: 'update'}
+  dump:
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: 'dump'}
+  analyse:
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: 'analyse'}
+  test:
+    cmds:
+      - task: composer
+        vars: {CLI_ARGS: 'test'}
