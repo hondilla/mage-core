@@ -9,9 +9,6 @@
         "@default": true
     },
     "logs": {
-        "html": "infection.html",
-        "stryker": {
-            "badge": "edge"
-        }
+        "html": "infection.html"
     },
 }
