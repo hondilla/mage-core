@@ -1,4 +1,6 @@
-# MCore
+# Mage Core
+
+---
 
 ## Requirements
 
@@ -7,38 +9,22 @@
 
 ---
 
-#### Build:
+### Build:
 
 `task build`
 
-#### Remove containers
+### Remove containers
 
 `task down`
 
-#### Remove containers & images
+### Remove containers & images
 
 `task clear`
 
-#### Composer
+### Composer
 
 `task composer -- params`
 
-#### Install dependencies
-
-`task install`
-
-#### Update dependencies
-
-`task update`
-
-#### Composer dump
-
-`task dump`
-
-#### Code analysis:
-
-`task analyse`
-
-#### Tests:
+### Tests:
 
 `task test`

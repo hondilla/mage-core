@@ -14,7 +14,8 @@ return static function (ECSConfig $ecsConfig): void {
 
     $ecsConfig->skip([
         \PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class,
-        \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class
+        \PhpCsFixer\Fixer\PhpTag\BlankLineAfterOpeningTagFixer::class,
+        \Symplify\CodingStandard\Fixer\Spacing\MethodChainingNewlineFixer::class
     ]);
 
     $ecsConfig->sets([
@@ -52,5 +53,16 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->ruleWithConfiguration(\PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class, [
         'lineLimit' => 100,
         'absoluteLineLimit' => 120
+    ]);
+
+    $ecsConfig->ruleWithConfiguration(\PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff::class, [
+        'forbiddenFunctions' => [
+            'dd' => null,
+            'dump' => null
+        ]
+    ]);
+
+    $ecsConfig->ruleWithConfiguration(\PHP_CodeSniffer\Standards\Generic\Sniffs\Metrics\CyclomaticComplexitySniff::class, [
+        'absoluteComplexity' => 10
     ]);
 };

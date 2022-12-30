@@ -25,10 +25,7 @@ final class AttributeCollection
 
     private function find(string $key): ?Attribute
     {
-        return search(
-            static fn (Attribute $attribute): bool => $attribute->key() === $key,
-            $this->attributes
-        );
+        return search(static fn (Attribute $attribute): bool => $attribute->key() === $key, $this->attributes);
     }
 
     public function findAll(string $key): array

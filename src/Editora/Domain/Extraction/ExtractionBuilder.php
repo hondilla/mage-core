@@ -53,10 +53,7 @@ final class ExtractionBuilder
     private function findRelatedInstances(array $relations, Instance $instance): array
     {
         return reduce(function (array $acc, Query $query) use ($instance): array {
-            $results = $this->extraction->findRelatedInstances(
-                $instance->uuid(),
-                $query->params()
-            );
+            $results = $this->extraction->findRelatedInstances($instance->uuid(), $query->params());
             $query->setPagination($results->pagination());
             $acc[] = (new RelationsResults($query->params()))
                 ->setResults($results)

@@ -78,10 +78,7 @@ final class Parser
     {
         return reduce(function (array $acc, FieldNode $node): array {
             if (count($node->arguments) === 0) {
-                $acc[] = new QueryAttribute(
-                    Utils::slug($node->name->value),
-                    $this->parseAttributes($node)
-                );
+                $acc[] = new QueryAttribute(Utils::slug($node->name->value), $this->parseAttributes($node));
             }
             return $acc;
         }, $node->toArray()['selectionSet']->selections ?? [], []);
@@ -93,10 +90,7 @@ final class Parser
             if (count($node->arguments) > 0) {
                 $acc[] = new Query([
                     'attributes' => $this->parseAttributes($node),
-                    'params' => $this->defaultRelationParams([
-                        ...$this->parseParams($node, 'key'),
-                        ...$params,
-                    ]),
+                    'params' => $this->defaultRelationParams([...$this->parseParams($node, 'key'), ...$params]),
                     'relations' => $this->parseRelations($node, $params),
                 ]);
             }

@@ -11,10 +11,7 @@ final class InstanceRelationCollection
 
     public function fill(array $relations): void
     {
-        $this->instanceRelations = flat_map(static function (
-            array $instances,
-            string $relationKey
-        ) {
+        $this->instanceRelations = flat_map(static function (array $instances, string $relationKey) {
             return new InstanceRelation($relationKey, $instances);
         }, $relations);
     }

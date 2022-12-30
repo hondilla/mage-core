@@ -43,11 +43,7 @@ final readonly class Instance
     {
         return [
             'key' => $this->key,
-            'attributes' => reduce(static function (
-                array $acc,
-                array $attributes,
-                string $language
-            ): array {
+            'attributes' => reduce(static function (array $acc, array $attributes, string $language): array {
                 $acc[$language] = reduce(static function ($acc, Attribute $attribute): array {
                     $acc[$attribute->key()] = $attribute->toArray();
                     return $acc;

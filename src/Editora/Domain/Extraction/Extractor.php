@@ -35,27 +35,15 @@ final readonly class Extractor
         return new ExtractionInstance([
             'class' => $instance->data()['classKey'],
             'key' => $instance->key(),
-            'attributes' => $this->extractAttributes(
-                $query->attributes(),
-                $instance->attributes(),
-            ),
+            'attributes' => $this->extractAttributes($query->attributes(), $instance->attributes()),
             'relations' => $this->extractRelations($query->relations(), $instanceRelations),
         ]);
     }
 
-    private function extractAttributes(
-        array $queryAttributes,
-        InstanceAttributes $instanceAttributes
-    ): array {
-        return reduce(function (
-            array $acc,
-            string $language
-        ) use ($queryAttributes, $instanceAttributes) {
-            $acc[$language] = $this->extractAttributesByLanguage(
-                $language,
-                $queryAttributes,
-                $instanceAttributes
-            );
+    private function extractAttributes(array $queryAttributes, InstanceAttributes $instanceAttributes): array
+    {
+        return reduce(function (array $acc, string $language) use ($queryAttributes, $instanceAttributes) {
+            $acc[$language] = $this->extractAttributesByLanguage($language, $queryAttributes, $instanceAttributes);
             return $acc;
         }, $this->query->languages(), []);
     }
@@ -65,17 +53,10 @@ final readonly class Extractor
         array $queryAttributes,
         InstanceAttributes $instanceAttributes
     ): array {
-        return reduce(function (
-            array $acc,
-            Attribute $instanceAttribute
-        ) use ($language, $queryAttributes): array {
+        return reduce(function (array $acc, Attribute $instanceAttribute) use ($language, $queryAttributes): array {
             $queryAttribute = $this->searchForQueryAttribute($queryAttributes, $instanceAttribute);
             if ($queryAttribute !== null) {
-                $acc[] = $this->fillValueForQueryAttribute(
-                    $language,
-                    $instanceAttribute,
-                    $queryAttribute
-                );
+                $acc[] = $this->fillValueForQueryAttribute($language, $instanceAttribute, $queryAttribute);
             }
             return $acc;
         }, $instanceAttributes->get(), []);
@@ -85,9 +66,7 @@ final readonly class Extractor
         array $queryAttributes,
         Attribute $instanceAttribute
     ): ?QueryAttribute {
-        $queryAttribute = search(static function (
-            QueryAttribute $queryAttribute
-        ) use ($instanceAttribute): bool {
+        $queryAttribute = search(static function (QueryAttribute $queryAttribute) use ($instanceAttribute): bool {
             return $instanceAttribute->key() === $queryAttribute->key();
         }, $queryAttributes);
         if ($queryAttributes === []) {
@@ -126,10 +105,7 @@ final readonly class Extractor
 
     private function extractRelations(array $queryRelations, array $relations): array
     {
-        return reduce(function (
-            array $acc,
-            RelationsResults $relation
-        ) use ($queryRelations): array {
+        return reduce(function (array $acc, RelationsResults $relation) use ($queryRelations): array {
             $queryRelation = search(static function ($query) use ($relation): bool {
                 if ($query->param('key') !== $relation->key()) {
                     return false;
