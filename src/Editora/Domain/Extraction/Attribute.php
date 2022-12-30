@@ -2,7 +2,6 @@
 
 namespace Omatech\MageCore\Editora\Domain\Extraction;
 
-use function Lambdish\Phunctional\map;
 use function Lambdish\Phunctional\reduce;
 
 final class Attribute extends QueryAttribute
@@ -22,7 +21,7 @@ final class Attribute extends QueryAttribute
         return [
             'uuid' => $this->uuid,
             'value' => $this->value,
-            'attributes' => reduce(static function (array $acc, Attribute $attribute): array {
+            'attributes' => reduce(static function (array $acc, self $attribute): array {
                 $acc[$attribute->key()] = $attribute->toArray();
                 return $acc;
             }, $this->attributes, []),

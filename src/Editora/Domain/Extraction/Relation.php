@@ -6,8 +6,10 @@ final class Relation
 {
     private array $instances = [];
 
-    public function __construct(private readonly string $key, private readonly string $type)
-    {
+    public function __construct(
+        private readonly string $key,
+        private readonly string $type
+    ) {
     }
 
     public function key(): string
@@ -25,7 +27,7 @@ final class Relation
         return $this->instances;
     }
 
-    public function setInstances(array $instances): Relation
+    public function setInstances(array $instances): self
     {
         $this->instances = $instances;
         return $this;

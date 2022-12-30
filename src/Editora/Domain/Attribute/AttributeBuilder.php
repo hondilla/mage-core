@@ -20,7 +20,7 @@ final class AttributeBuilder
                 ->setValues($properties['values'])
                 ->setKey($properties['key'])
                 ->build();
-            $properties['attributes'] = (new AttributeBuilder())
+            $properties['attributes'] = (new self())
                 ->setLanguages($this->languages)
                 ->setAttributes($properties['attributes'])
                 ->build();
@@ -38,13 +38,13 @@ final class AttributeBuilder
         ];
     }
 
-    public function setAttributes(array $attributes): AttributeBuilder
+    public function setAttributes(array $attributes): self
     {
         $this->attributes = $attributes;
         return $this;
     }
 
-    public function setLanguages(array $languages): AttributeBuilder
+    public function setLanguages(array $languages): self
     {
         $this->languages = $languages;
         return $this;

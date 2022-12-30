@@ -43,7 +43,7 @@ final class Validator
             $relation = search(static function (Relation $relation) use ($instanceRelation): bool {
                 return $relation->key() === $instanceRelation->key();
             }, $classRelation);
-            if (is_null($relation)) {
+            if ($relation === null) {
                 InvalidRelationException::withRelation($instanceRelation->key());
             }
             $relation->validate($instanceRelation->instances());

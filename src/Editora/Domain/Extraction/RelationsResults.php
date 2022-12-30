@@ -15,13 +15,13 @@ final class RelationsResults
         $this->type = $params['type'];
     }
 
-    public function setResults(Results $results): RelationsResults
+    public function setResults(Results $results): self
     {
         $this->results = $results;
         return $this;
     }
 
-    public function setRelations(array $relations): RelationsResults
+    public function setRelations(array $relations): self
     {
         $this->relations = $relations;
         return $this;

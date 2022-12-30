@@ -4,8 +4,10 @@ namespace Omatech\MageCore\Editora\Domain\Extraction;
 
 final readonly class Value
 {
-    public function __construct(private ?string $uuid, private mixed $value)
-    {
+    public function __construct(
+        private ?string $uuid,
+        private mixed $value
+    ) {
     }
 
     public function uuid(): ?string

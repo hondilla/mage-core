@@ -25,9 +25,9 @@
     "mockery/mockery": "^1.5",
     "phpstan/phpstan": "^1.9",
     "phpunit/phpunit": "^9.5",
-    "rector/rector": "^0.15.1",
     "roave/security-advisories": "dev-latest",
-    "symfony/var-dumper": "^v6.1"
+    "symfony/var-dumper": "^v6.1",
+    "symplify/easy-coding-standard": "^11.1"
   },
   "autoload": {
     "psr-4": {
@@ -46,7 +46,7 @@
       "@paratest",
       "@infection"
     ],
-    "rector": "vendor/bin/rector",
+    "ecs": "vendor/bin/ecs check src",
     "phpstan": "vendor/bin/phpstan analyse src --xdebug"
   },
   "config": {

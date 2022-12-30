@@ -11,7 +11,7 @@ class InstanceExtractionQueryParserTest extends TestCase
     public function givenExtractionExpressionWhenGetParsedThenGeneratedArrayIsOk(): void
     {
         $graphQuery = '{
-            Books(languages: [en], preview: true) {
+            Books(preview: true) {
                 title,
                 isbn,
                 synopsis,
@@ -25,7 +25,7 @@ class InstanceExtractionQueryParserTest extends TestCase
                 }
             }
         }';
-        $query = (new Parser())->parse($graphQuery)[0];
+        $query = (new Parser('en'))->parse($graphQuery)[0];
 
         $this->assertNull($query->param('non-existent-param'));
         $this->assertSame([
@@ -54,12 +54,12 @@ class InstanceExtractionQueryParserTest extends TestCase
                 ],
             ],
             'params' => [
-                'languages' => ['en'],
                 'preview' => true,
                 'class' => 'books',
                 'key' => null,
                 'limit' => 0,
                 'page' => 1,
+                'languages' => ['en'],
             ],
             'relations' => [
                 [

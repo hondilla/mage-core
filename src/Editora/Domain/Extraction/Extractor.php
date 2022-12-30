@@ -120,7 +120,7 @@ final readonly class Extractor
 
         return new Value(
             $attribute->values()->language($language)?->uuid(),
-            first(filter(static fn ($value) => ! is_null($value), $values))
+            first(filter(static fn ($value) => $value !== null, $values))
         );
     }
 

@@ -12,14 +12,22 @@ use function Lambdish\Phunctional\reduce;
 final class ExtractionBuilder
 {
     private string $query;
+    private string $defaultLanguage = '';
 
-    public function __construct(private readonly ExtractionInterface $extraction)
-    {
+    public function __construct(
+        private readonly ExtractionInterface $extraction
+    ) {
     }
 
     public function setQuery(string $query): self
     {
         $this->query = $query;
+        return $this;
+    }
+
+    public function setDefaultLanguage(string $language): self
+    {
+        $this->defaultLanguage = $language;
         return $this;
     }
 
@@ -30,7 +38,7 @@ final class ExtractionBuilder
             return $query
                 ->setPagination($results->pagination())
                 ->setResults($this->extractResults($query, $results->instances()));
-        }, (new Parser())->parse($this->query));
+        }, (new Parser($this->defaultLanguage))->parse($this->query));
         return new Extraction($this->query, $queryResults);
     }
 

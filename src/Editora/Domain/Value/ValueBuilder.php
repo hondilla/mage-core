@@ -63,19 +63,19 @@ final class ValueBuilder
         }, $this->values);
     }
 
-    public function setLanguages(array $languages): ValueBuilder
+    public function setLanguages(array $languages): self
     {
         $this->languages = $languages;
         return $this;
     }
 
-    public function setValues(array $values): ValueBuilder
+    public function setValues(array $values): self
     {
         $this->values = $values;
         return $this;
     }
 
-    public function setKey(string $key): ValueBuilder
+    public function setKey(string $key): self
     {
         $this->key = $key;
         return $this;

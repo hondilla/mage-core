@@ -65,7 +65,7 @@ final class Query
                 return $attribute->toQuery();
             }, $this->attributes),
             'params' => $this->params,
-            'relations' => reduce(static function (array $acc, Query $query): array {
+            'relations' => reduce(static function (array $acc, self $query): array {
                 $acc[] = $query->toArray();
                 return $acc;
             }, $this->relations, []),

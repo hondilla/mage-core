@@ -6,8 +6,9 @@ use function Lambdish\Phunctional\get_in;
 
 final class Configuration
 {
-    public function __construct(private array $configuration)
-    {
+    public function __construct(
+        private array $configuration
+    ) {
     }
 
     public function exists(mixed $value, array $path): bool

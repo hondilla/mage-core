@@ -19,7 +19,7 @@ use Tests\TestCase;
 class InstanceExtractionTest extends TestCase
 {
     /** @test */
-    public function given(): void
+    public function givenQueryWhenNoResultsThenOk(): void
     {
         $graphQuery = '{
             News(preview: false, languages: [es, en], page: 1)
@@ -30,6 +30,7 @@ class InstanceExtractionTest extends TestCase
         ]);
 
         $extraction = (new ExtractionBuilder($mock))
+            ->setDefaultLanguage('es')
             ->setQuery($graphQuery)
             ->build();
 
@@ -361,7 +362,7 @@ class InstanceExtractionTest extends TestCase
     private function mockExtraction(string $graphQuery, array $instances): ExtractionInterface
     {
         $mock = Mockery::mock(ExtractionInterface::class);
-        $parsedQuery = (new Parser())->parse($graphQuery);
+        $parsedQuery = (new Parser('es'))->parse($graphQuery);
         foreach($parsedQuery as $index => $query) {
             $mock->shouldReceive('instancesBy')
                 ->with($query->params())

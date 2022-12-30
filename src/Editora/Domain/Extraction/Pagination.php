@@ -8,8 +8,10 @@ final readonly class Pagination
     private int $current;
     private int $pages;
 
-    public function __construct(array $params, private int $total)
-    {
+    public function __construct(
+        array $params,
+        private int $total
+    ) {
         $this->limit = $params['limit'] > 0 ? $params['limit'] : $total;
         $this->current = $params['page'];
         $this->pages = ($this->limit > 0) ? (int) ceil($this->total / $this->limit) : 0;

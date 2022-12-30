@@ -16,8 +16,9 @@ final class InstanceBuilder
     private array $structure = [];
     private string $className = '';
 
-    public function __construct(private readonly InstanceCacheInterface $instanceCache)
-    {
+    public function __construct(
+        private readonly InstanceCacheInterface $instanceCache
+    ) {
     }
 
     public function build(): Instance
@@ -65,19 +66,19 @@ final class InstanceBuilder
         }, $this->structure['relations'] ?? []);
     }
 
-    public function setLanguages(array $languages): InstanceBuilder
+    public function setLanguages(array $languages): self
     {
         $this->languages = array_fill_keys($languages, []);
         return $this;
     }
 
-    public function setStructure(array $structure): InstanceBuilder
+    public function setStructure(array $structure): self
     {
         $this->structure = $structure;
         return $this;
     }
 
-    public function setClassName(string $className): InstanceBuilder
+    public function setClassName(string $className): self
     {
         $this->className = Utils::slug($className);
         return $this;

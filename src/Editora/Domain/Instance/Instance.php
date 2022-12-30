@@ -5,7 +5,6 @@ namespace Omatech\MageCore\Editora\Domain\Instance;
 use Omatech\MageCore\Editora\Domain\Attribute\AttributeCollection;
 use Omatech\MageCore\Editora\Domain\Clazz\Clazz;
 use Omatech\MageCore\Editora\Domain\Instance\Validator\Validator;
-use function DeepCopy\deep_copy;
 
 class Instance
 {

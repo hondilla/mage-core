@@ -6,8 +6,10 @@ use Omatech\MageCore\Editora\Domain\Clazz\Exceptions\InvalidRelationClassExcepti
 
 final class Relation
 {
-    public function __construct(private string $key, private array $classes)
-    {
+    public function __construct(
+        private string $key,
+        private array $classes
+    ) {
     }
 
     public function validate(array $classes): void

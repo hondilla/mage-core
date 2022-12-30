@@ -12,6 +12,11 @@ use function Lambdish\Phunctional\search;
 
 final class Parser
 {
+    public function __construct(
+        private readonly string $defaultLanguage
+    ) {
+    }
+
     public function parse(string $query): array
     {
         $graphQuery = GraphQLParser::parse(str_replace('()', '(limit: 0)', $query));
@@ -49,7 +54,7 @@ final class Parser
         $params['preview'] ??= false;
         $params['limit'] = (int) ($params['limit'] ?? 0);
         $params['page'] = (int) ($params['page'] ?? 1);
-        $params['languages'] = $this->parseLanguages($params['languages'] ?? []);
+        $params['languages'] = $this->parseLanguages($params['languages'] ?? [$this->defaultLanguage]);
         return $params;
     }
 

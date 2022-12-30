@@ -4,8 +4,10 @@ namespace Omatech\MageCore\Editora\Domain\Instance;
 
 final readonly class InstanceRelation
 {
-    public function __construct(private string $key, private array $instances)
-    {
+    public function __construct(
+        private string $key,
+        private array $instances
+    ) {
     }
 
     public function key(): string
